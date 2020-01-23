@@ -1,11 +1,10 @@
-FROM centos
+FROM conda/miniconda3
 
 MAINTAINER yen
 
-RUN rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm \
-      && yum update -y \
-      && yum install -y python-pip \
-      && pip install flask
+RUN apt-get update \ 
+	&& conda install flask -y \
+    && pip freeze list 
 
 COPY . /src
 
