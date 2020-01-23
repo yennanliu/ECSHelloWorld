@@ -1,13 +1,17 @@
-FROM conda/miniconda3
+FROM ubuntu:16.04
 
-MAINTAINER yen
+MAINTANER yen
 
-RUN apt-get update \ 
-	&& conda install flask -y \
-    && pip freeze list 
+RUN apt-get update -y && \
+    apt-get install -y python-pip python-dev
 
-COPY . /src
+# We copy just the requirements.txt first to leverage Docker cache
+# COPY ./requirements.txt /app/requirements.txt
 
-EXPOSE 8081
+WORKDIR /app
 
-CMD cd /src && python blog.py
+RUN pip install flask
+
+COPY . /app
+
+CMD ["python" "/app/blog/blog.py" ]
