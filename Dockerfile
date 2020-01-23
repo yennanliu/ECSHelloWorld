@@ -12,4 +12,7 @@ RUN pip install flask
 
 COPY . /app
 
+EXPOSE 8081
+EXPOSE 5000
+
 CMD ["python", "/app/blog/blog.py" ]
